@@ -2,21 +2,21 @@
 def merge(arrA, arrB):
     merged_arr = []
     # TO-DO
-    for i in range(min([len(arrA), len(arrB)])):
-        if arrA[i] < arrB[i]:
+    i = j = 0
+    while i < len(arrA) and j < len(arrB):
+        if arrA[i] < arrB[j]:
             merged_arr.append(arrA[i])
-            merged_arr.append(arrB[i])
+            i += 1
         else:
-            merged_arr.append(arrB[i])
-            merged_arr.append(arrA[i])
+            merged_arr.append(arrB[j])
+            j += 1
 
-    # compensate for lists not being same length
-    difference = len(arrA) - len(arrB)
-    if difference > 0:
-        # add the remaining amount of arrA
-        merged_arr += arrA[-difference:]
-    elif difference < 0:
-        merged_arr += arrB[difference:]
+    # one list has emptied into merged_arr
+    # add the remaining values of the other list to merged_arr
+    if i < len(arrA):
+        merged_arr += arrA[i-len(arrA):]
+    elif j < len(arrB):
+        merged_arr += arrB[j-len(arrB):]
 
     return merged_arr
 
@@ -28,15 +28,9 @@ def merge_sort(arr):
         left = arr[:len(arr)//2]
         right = arr[len(arr)//2:]
 
-        arr1 = merge_sort(left)
-        arr2 = merge_sort(right)
-
-        arr = merge(arr1, arr2)
+        arr = merge(merge_sort(left), merge_sort(right))
     return arr
 
-
-print(merge([3, 5, 7, 8, 9], [1, 2, 6, 10]))
-print(merge_sort([5, 6, 4, 3, 8, 9, 0, 1, 2, 3, 5, 3, 7]))
 # STRETCH: implement an in-place merge sort algorithm
 
 
