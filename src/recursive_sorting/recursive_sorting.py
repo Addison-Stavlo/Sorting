@@ -31,6 +31,7 @@ def merge_sort(arr):
         arr = merge(merge_sort(left), merge_sort(right))
     return arr
 
+
 # STRETCH: implement an in-place merge sort algorithm
 
 
