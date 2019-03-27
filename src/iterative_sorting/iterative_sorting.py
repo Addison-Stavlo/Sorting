@@ -1,4 +1,18 @@
+# insertion sort ex from GP
+def insertion_sort(books):
+    for i in range(1, len(books)):
+        temp = books[i]
+        j = i
+        while j > 0 and temp.genre < books[j - 1].genre:
+            books[j] = books[j - 1]
+            j -= 1
+        books[j] = temp
+
+    return books
+
 # TO-DO: Complete the selection_sort() function below
+
+
 def selection_sort(arr):
     # loop through n-1 elements
     for i in range(0, len(arr) - 1):
