@@ -43,7 +43,6 @@ def bubble_sort(arr):
     return arr
 
 
-print(bubble_sort([1, 5, 8, 4, 2, 9, 6, 0, 3, 7]))
 # STRETCH: implement the Count Sort function below
 
 
@@ -73,6 +72,3 @@ def count_sort(arr, maximum=-1):
         counts[(arr[i])] -= 1
 
     return sorted_arr
-
-
-print(count_sort([1, 5, 8, 4, 2, 9, 6, 0, 3, 7]))
