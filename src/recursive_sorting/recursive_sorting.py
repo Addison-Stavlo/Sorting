@@ -1,4 +1,6 @@
 # TO-DO: complete the helpe function below to merge 2 sorted arrays
+
+
 def merge(arrA, arrB):
     merged_arr = []
     # TO-DO
@@ -75,7 +77,40 @@ def merge_sort_in_place(arr, l=[], r=[]):
 # # STRETCH: implement the Timsort function below
 # # hint: check out https://github.com/python/cpython/blob/master/Objects/listsort.txt
 
+# helper for timsort
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        temp = arr[i]
+        j = i
+        while j > 0 and temp < arr[j - 1]:
+            arr[j] = arr[j - 1]
+            j -= 1
+        arr[j] = temp
+
+    return arr
+
 
 def timsort(arr):
 
-    return arr
+    sorted_arrs = []
+    # break array up into segments (size 32)
+    # sort these segments using insertion sort
+    # place sorted segments in sorted_arrs for safe keeping
+    for i in range(0, len(arr), 32):
+        sorted_sub_arr = insertion_sort(arr[i:min(i+32, len(arr))])
+        sorted_arrs.append(sorted_sub_arr)
+
+    # now essentially copy the last half of merge_sort_in_place above
+    # merge together all the sorted sub arrays until there is nothing left to merge
+    while len(sorted_arrs[0]) < len(arr):
+        i = 0
+        # loop through and merge adjacent elements
+        while i < len(sorted_arrs) - 1:
+            merged_section = merge(sorted_arrs[i], sorted_arrs[i+1])
+            # replace i-th element with merged section
+            sorted_arrs[i] = merged_section
+            # delete i+1-th element now that it is in i-th
+            del sorted_arrs[i+1]
+            i += 1
+
+    return sorted_arrs[0]
