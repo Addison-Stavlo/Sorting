@@ -46,6 +46,7 @@ def merge_in_place(arr, start, mid, end):
 # these are things we can tell from receiving arr
 # making them required inputs is redundant
 # im setting them equal to empty lists instead of removing for test file purposes
+# they will be unused
 def merge_sort_in_place(arr, l=[], r=[]):
     # TO-DO
     if len(arr) < 2:
